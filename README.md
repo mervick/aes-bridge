@@ -22,9 +22,9 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 
 ## Implementations
 
+* **JavaScript**: [AesBridge JS](https://github.com/mervick/aes-bridge-js)
 * **PHP**: [AesBridge PHP](https://github.com/mervick/aes-bridge-php)
 * **Python**: [AesBridge Python](https://github.com/mervick/aes-bridge-python)
-* **JavaScript**: [AesBridge JS](https://github.com/mervick/aes-bridge-js)
 
 
 Each implementation provides an equivalent API interface that includes the same core methods: `encrypt_cbc`, `decrypt_cbc`, `encrypt_gcm`, `decrypt_gcm`, `encrypt_legacy`, and `decrypt_legacy`.  

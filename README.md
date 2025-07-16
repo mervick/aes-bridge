@@ -32,7 +32,7 @@ The method names and functionality are consistent across languages, while the ac
 
 ## Compatibility
 
-AesBridge is **interoperable** between all supported languages. You can encrypt data in one language and decrypt in another, as long as the same algorithm and keys are used.
+AesBridge is **interoperable** between all supported languages. You can encrypt data in one language and decrypt in another, as long as the same mode and passphrases are used.
 
 ## Documentation
 

@@ -1,5 +1,8 @@
 # AesBridge
 
+![NPM Version](https://img.shields.io/npm/v/aes-bridge.svg)
+![PyPI Version](https://img.shields.io/pypi/v/aes-bridge.svg)
+![Packagist Version](https://img.shields.io/packagist/v/mervick/aes-bridge.svg)  
 ![CI Status](https://github.com/mervick/aes-bridge/actions/workflows/cross-test.yml/badge.svg)
 
 

@@ -2,6 +2,7 @@
 
 ![NPM Version](https://img.shields.io/npm/v/aes-bridge.svg)
 ![PyPI Version](https://img.shields.io/pypi/v/aes-bridge.svg)
+![Gem Version](https://img.shields.io/gem/v/aes-bridge.svg)
 ![Packagist Version](https://img.shields.io/packagist/v/mervick/aes-bridge.svg)  
 ![CI Status](https://github.com/mervick/aes-bridge/actions/workflows/cross-test.yml/badge.svg)
 
@@ -26,6 +27,7 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 * **JavaScript**: [AesBridge JS](https://github.com/mervick/aes-bridge-js)
 * **PHP**: [AesBridge PHP](https://github.com/mervick/aes-bridge-php)
 * **Python**: [AesBridge Python](https://github.com/mervick/aes-bridge-python)
+* **Ruby**: [AesBridge Ruby](https://github.com/mervick/aes-bridge-ruby)
 
 
 Each implementation provides an equivalent API interface that includes the same core methods: `encrypt_cbc`, `decrypt_cbc`, `encrypt_gcm`, `decrypt_gcm`, `encrypt_legacy`, and `decrypt_legacy`.  

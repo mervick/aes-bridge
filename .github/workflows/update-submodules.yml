@@ -34,7 +34,7 @@ jobs:
         else
           echo "Submodules updated. Committing changes to the main repository..."
           git add .
-          git commit -m "chore: Auto-update submodules to latest remote versions [skip ci]"
+          git commit -m "chore: Auto-update submodules to latest remote versions"
           echo "updated=true" >> $GITHUB_OUTPUT
         fi
 

@@ -1,0 +1,45 @@
+name: Auto Update Git Submodules to Latest Remote
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update_submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        submodules: true
+
+    - name: Configure Git for automated commit
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git pull
+
+    - name: Update submodules to their latest remote versions
+      id: update_step
+      run: |
+        echo "Attempting to update submodules to their latest remote versions..."
+        git submodule update --init --recursive --remote --merge || { echo "::warning::Submodule update failed for some reason."; }
+        if git diff-index --quiet HEAD --; then
+          echo "No submodule changes detected. All submodules are already at their latest remote versions."
+          echo "updated=false" >> $GITHUB_OUTPUT
+        else
+          echo "Submodules updated. Committing changes to the main repository..."
+          git add .
+          git commit -m "chore: Auto-update submodules to latest remote versions [skip ci]"
+          echo "updated=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Push changes (if any)
+      if: steps.update_step.outputs.updated == 'true'
+      run: |
+        echo "Pushing updated submodule references to origin/main..."
+        git push origin main

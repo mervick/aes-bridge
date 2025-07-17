@@ -10,5 +10,9 @@
     "php": {
         "path": "aes-bridge-php/cli.php",
         "executor": "php"
+    },
+    "ruby": {
+        "path": "aes-bridge-ruby/cli.rb",
+        "executor": "ruby"
     }
 }

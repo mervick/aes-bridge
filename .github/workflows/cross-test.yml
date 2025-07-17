@@ -17,11 +17,41 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Update submodules to their latest remote versions
+        id: update_step
+        run: |
+          echo "Attempting to update submodules to their latest remote versions..."
+          git submodule update --init --recursive --remote --merge || { echo "::warning::Submodule update failed for some reason."; }
+
+      - name: Install NPM dependencies
+        working-directory: ./aes-bridge-js
+        run: npm ci
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, openssl, json
+          coverage: none
+
+      - name: Install dependencies
+        working-directory: ./aes-bridge-php
+        run: composer install --no-progress --prefer-dist
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: ./aes-bridge-python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run tests
         run: |

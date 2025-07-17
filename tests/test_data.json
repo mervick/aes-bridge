@@ -1,0 +1,60 @@
+{
+  "testdata": {
+    "plaintext": [
+      "",
+      "A",
+      "000102030405060708090a0b0c0d0e0f",
+      "ABCDEF0123456789",
+      "The quick brown fox jumps over the lazy dog.",
+      "Съешь ещё этих мягких французских булок, да выпей чаю.",
+      "中文测试 — 測試中文字符",
+      "𝔗𝔥𝔦𝔰 𝔦𝔰 𝔞 𝔱𝔢𝔵𝔱 𝔴𝔦𝔱𝔥 𝔣𝔯𝔞𝔨𝔱𝔲𝔯 𝔩𝔢𝔱𝔱𝔢𝔯𝔰.",
+      "Emoji test: 😉😌😍😘🔥🔥💥"
+    ],
+    "hex": [
+      "5964d4f5bc127ed016cc471ba8250f05f707da12f8e5c85e733a2abe31a705ffd7a72fe5d4c40611aca98396dc123093c37340cd17f926b73be6753e9636e0ea"
+    ]
+  },
+  "decrypt": [
+    {
+      "id": "empty_text_passphrase",
+      "plaintext": "",
+      "passphrase": "",
+      "encrypted-cbc": "d70jWQQ168YjOSCtakpqFhcXAUAPbi73KdJyDiRNdgodKe5vBppGMKllMBJW60tjcGwyeo7hcboDFldqypZWLNA7ADToK8FXtuptS/OLjYo=",
+      "encrypted-gcm": "qmF/OmL/6ULDRhHQwCkx3yqNLklTFaetHVtMTt3gm1kxnn7C1xa/ym6fTrw=",
+      "encrypted-legacy": "U2FsdGVkX1+Cyk5t+UT/wksJJ0z8jZCtHUzOFSAZApY="
+    }, {
+      "id": "empty_text",
+      "plaintext": "",
+      "passphrase": "password",
+      "encrypted-cbc": "utx0Dv6PSUhWm4PBbqsNdJRRZkK1GbY1dfYNVmRzQ3BUnOqZ9gDEX+s9zdk+kGq1zcfl0COCBDIFTvKBexycFnETAQdxpyt5VjT3U77uBd4=",
+      "encrypted-gcm": "3Qdd65IVNQqZeq4l/eXPF/feAfSM0IRo8AI2cAPwgIHU/Jo2inyWgM7ZQvY=",
+      "encrypted-legacy": "U2FsdGVkX1/5VjIpUvI/B+A2hytUI1WyBwzYKPBxvGk="
+    }, {
+      "id": "empty_passphrase",
+      "plaintext": "The quick brown fox выпей чаю 中文测试 𝔣𝔯𝔞𝔨𝔱𝔲𝔯 😉😌😍😘",
+      "passphrase": "",
+      "encrypted-cbc": "2G2EcdfmP0z0W0Nq4ncfVrMY4zVJv+Lc/7FG3jvoGjWm0evukfgCrUUzHOTu4X/6suTODLJXxVWCDYlzGV/oVpWMlJ+P/+zNTCwOBn+iO82TC9OUnZNIzbjFV7/KdN1y0xDWsmtsj0j84ov9UUDCLCO5yZhmG/Mpdm+W7NT3bP+43RoB0YxWSVfEPVizD/kU/wY/qxGsRnjUJ9rzTQG2N8vwrqx4RNRwJC8l5p1TJkU=",
+      "encrypted-gcm": "XxVvYTOuKGxwL/husHQf6p8Y103z+dXmCzUmpWPVIETy6rY0EiiH8FoLikeC4xig3XwuwJ+gkNWbwUkhOHGiapEz5oBGbmVpftHuTTZisqVuQAXXkrieTl9hbWXlL7iim1C7d9oAvvV5523HhqQbo1VRnjAHr5JRP0MYuiK9RqBha6ziIzuSTloVWbg=",
+      "encrypted-legacy": "U2FsdGVkX1+LTVSEG1YzsTq8wc232QWdtQdmt42OfAARlKg7Fm/EDNQBR7s2jMtjYDBJUHkp0csyoE1HgUQ6zY1Xr2HbR8qDZ13oTad5qJj1o/ZsXFbgaqHjSHh43y2YvKoDJmtpfxkJFaI9Z5PCHtBzOFZLo+XFuOLSLeJtVOE="
+    }, {
+      "id": "plaintext_utf8",
+      "plaintext": "The quick brown fox выпей чаю 中文测试 𝔣𝔯𝔞𝔨𝔱𝔲𝔯 😉😌😍😘",
+      "passphrase": "áuhêüÖÕ0H_{³¹ßLè\\8ÉñïäzH`&[BÔÍ¨åg_!±Ýp+ãÏÜì 😍",
+      "encrypted-cbc": "JELXLWOrwjopsFKiEV11L68Ta5Mz9adzNNewgyzITPeZ3CQ5a/00FSDTPJ+tbGH9DagB04LNoIriC2o/etpkE1DkFwJZk0jXN12bFGwWJZPZy15T9JxDL/BOHiiycICoTGAToH6XyOuc5vXHsZwFSn/1QL5+xaR2GPbL/wWKnmckDj+W5hhvh2R4Z7V9dQmVc9PSCCYnbn8vymiFLc7deAxcpjg45+6hONn80GJ8fNg=",
+      "encrypted-gcm": "W4et1smZeF2JGtYjzkdHbAvaqXb+K1nzzcfY2bTTpgsbPw4TmBFc0I5iwgWoU0hGC9ZuB/UcS1huxOHZe7WqR4Ol/FyNhjDB9bTobZCigAC4Q7GVpjiNCZYwouNfL7R/Nn4GyPjOGLY+E/9QisBv0tyfP4rLzFHzZzRmxb0skuT5IqP2lox/sBI4+YI=",
+      "encrypted-legacy": "U2FsdGVkX18NhLfGwJ8bJzqrUIyGgE5dl4bi486LLXNPZrQvHGnATGrqL2Jy9a04c+ockLNDQvJ/Q4RepPzX9z/Igim+ziV6JAODOjAtov1LTj2eXw9mD1oxUpMNcohf+uOKxar9dSPVf0lj+qU+DF7DXf78WfIG9cnjTV6CqHo="
+    }, {
+      "id": "binary_data",
+      "hex": "5964d4f5bc127ed016cc471ba8250f05f707da12f8e5c85e733a2abe31a705ffd7a72fe5d4c40611aca98396dc123093c37340cd17f926b73be6753e9636e0ea",
+      "passphrase": "áuhêüÖÕ0H_{³¹ßLè\\8ÉñïäzH`&[BÔÍ¨åg_!±Ýp+ãÏÜì 😍",
+      "encrypted-cbc": "MWafJI+DZTNbNRdHmrEZyO42WHVm571+Ub23+hlWp24Wc4iiPJTqJnEt1kILv3eqLJOPcpVstVV1E9Wbxk8y7rcMScQF4FNGTAm+xJ3VrREzr3KAanKjbMTOovx5wuk2flPL+rTNSpYv1bJjQ9HmG8CMHFUk5yi+XzJkAc4RVU7qAbX4fqWsbYxt4Y26idjA",
+      "encrypted-gcm": "N8w4J2sO2df2tv1QDSJuQE+ovcfz5YMfYsiFeLghZkPJoXQrQbzDQiG5X7Pyz8RP2kuAx4GBAyZ8wt+FUbk1xl26rQJjDL5lSJXoC+DaJEeiyvmFvTXDOLxymmhvsvWmlLmuL7WTM0tgj6ky"
+    }, {
+      "id": "legacy_utf8",
+      "passphrase": "P@ssw0rd 😄",
+      "plaintext": "Привет, мир! こんにちは！Hello, world! 😊 123",
+      "encrypted-legacy": "U2FsdGVkX19Fw9R5L9g+UqtDwcYdsvvuf7P+UMgqS5YXi4+gDobFZ8Jl6kFwJJf8EVABC/DK2mJnEVa2MD7oeYEHFHM2F/RKHRVxlFH6cFE="
+    }
+  ]
+}

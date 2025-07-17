@@ -1,0 +1,15 @@
+{
+
+    "js": {
+        "path": "../aes-bridge-js/cli.js",
+        "executor": "node"
+    },
+    "python": {
+        "path": "../aes-bridge-python/cli.py",
+        "executor": "python"
+    },
+    "php": {
+        "path": "../aes-bridge-php/cli.php",
+        "executor": "php"
+    }
+}

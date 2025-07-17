@@ -7,3 +7,6 @@
 [submodule "aes-bridge-js"]
 	path = aes-bridge-js
 	url = https://github.com/mervick/aes-bridge-js
+[submodule "aes-bridge-ruby"]
+	path = aes-bridge-ruby
+	url = https://github.com/mervick/aes-bridge-ruby

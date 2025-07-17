@@ -6,6 +6,9 @@ import base64
 import os
 import secrets
 
+current_dir = os.path.dirname(__file__)
+project_root = os.path.abspath(os.path.join(current_dir, '..'))
+
 # Function to run a command and return stdout
 def run_command(command_parts):
     try:
@@ -35,7 +38,7 @@ def to_str(s: str | bytes):
 class CliExecutor:
     def __init__(self, language: str, path: str, executor: str):
         self.language = language
-        self.path = path
+        self.path = os.path.join(project_root, path)
         self.executor = executor
 
     def execute(self, action: Literal["encrypt", "decrypt"], mode: Literal["gcm", "cbc", "legacy"], data: bytes | str, passphrase: bytes | str):

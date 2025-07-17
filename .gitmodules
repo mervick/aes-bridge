@@ -1,0 +1,9 @@
+[submodule "aes-bridge-php"]
+	path = aes-bridge-php
+	url = https://github.com/mervick/aes-bridge-php
+[submodule "aes-bridge-python"]
+	path = aes-bridge-python
+	url = https://github.com/mervick/aes-bridge-python
+[submodule "aes-bridge-js"]
+	path = aes-bridge-js
+	url = https://github.com/mervick/aes-bridge-js

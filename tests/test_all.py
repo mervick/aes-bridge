@@ -120,14 +120,13 @@ def load_cli_tests():
                     add_test(f"test_gcm_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
                     add_test(f"test_legacy_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
 
-            # test_key = 'hex'
-            # for idx, hex_text in enumerate(test_data.get('testdata', {}).get('hex', [])):
-            #     test_text = bytes.fromhex(hex_text)
-            #     if len(test_text) > 0:
-            #         # add_test(f"test_cbc_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_cbc, decryptor.decrypt_cbc, test_text, passphrase)
-            #         add_test(f"test_gcm_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
-            #         # add_test(f"test_legacy_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt,encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
-            # break
+            test_key = 'hex'
+            for idx, hex_text in enumerate(test_data.get('testdata', {}).get('hex', [])):
+                test_text = bytes.fromhex(hex_text)
+                if len(test_text) > 0:
+                    add_test(f"test_cbc_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_cbc, decryptor.decrypt_cbc, test_text, passphrase)
+                    add_test(f"test_gcm_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
+                    add_test(f"test_legacy_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt,encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
 
 load_cli_tests()
 

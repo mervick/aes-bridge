@@ -46,7 +46,7 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 
 #### **3. CBC Legacy (for AES Everywhere backward compatibility)**
 
-* A specific **CBC** mode precisely mimicking the behavior of the older **AES Everywhere** library.
+* **CBC** mode precisely mimicking the behavior of the older **AES Everywhere** library.
 * Primary purpose is **backward compatibility**. Allows decryption of data encrypted with AES Everywhere, and vice-versa. Doesn't include built-in integrity checks like GCM or CBC+HMAC, as it replicates the older behavior.
 * For new projects, using **GCM** or **CBC** with HMAC is recommended.
 
@@ -75,13 +75,13 @@ Each implementation provides equivalent core methods with consistent behavior ac
 | **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc()`      | `decryptCbc()`     | Decrypt CBC Base64 data |
 | **CBC Binary Encryption**  | CBC           | Base64     | `encrypt_cbc_bin()`  | `encryptCbcBin()`  | Encrypt with CBC, return binary |
 | **CBC Binary Decryption**  | CBC           | Base64     | `decrypt_cbc_bin()`  | `decryptCbcBin()`  | Decrypt CBC binary data |
-| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | `encryptLegacy()`  | OpenSSL-compatible format, return Base64 |
-| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | `decryptLegacy()`  | OpenSSL-compatible decryption (decrypts Base64 data) |
+| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | `encryptLegacy()`  | AES Everywhere legacy format, return Base64 |
+| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | `decryptLegacy()`  | AES Everywhere legacy decryption (decrypts Base64 data) |
 
 #### **Language-Specific Naming Notes:**
 
-- **Python/Ruby**: Uses **snake_case** (`encrypt_gcm_bin`)
-- **JavaScript/PHP**: Uses **camelCase** (`encryptGcmBin`)
+- **Python, Ruby**: Uses **snake_case** (`encrypt_gcm_bin`)
+- **JavaScript, PHP**: Uses **camelCase** (`encryptGcmBin`)
 
 Each implementation contains its own README with usage examples.  
 

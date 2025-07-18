@@ -54,11 +54,11 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 
 All **AesBridge** implementations guarantee:
 
-1. **Identical cryptographic behavior** across all implementations
-2. **Same parameter order** (data, passphrase)
-3. **Identical output formats** (binary structure or Base64 encoding)
-4. **Matching API structure** (following language conventions)
-5. **Interoperable encrypted data** - encrypt in one language, decrypt in another
+- **Identical cryptographic behavior** across all implementations
+- **Same parameter order** (data, passphrase)
+- **Identical output formats** (binary structure or Base64 encoding)
+- **Matching API structure** (following language conventions)
+- **Interoperable encrypted data** - encrypt in one language, decrypt in another
 
 
 ## API Methods

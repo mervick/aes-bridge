@@ -14,12 +14,12 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 
 ## Features
 
-* 🛡️ **AES-256 encryption**
-* 🔐 **CBC** and **GCM** modes
-* 🧪 Optional **Legacy CBC** mode (OpenSSL-compatible, with salt header)
-* 🌍 Unified cross-language compatibility
-* ✨ Minimal and secure design
-* ✅ Tested compatibility between implementations
+- **🛡️ AES-256 encryption** - Industry-standard 256-bit encryption
+- **🔐 Multiple modes** - **CBC** and **GCM**
+- **↩️ Legacy CBC** - For backward compatibility with projects using **AES Everywhere**.
+- **🌍 Cross-language compatibility** - Unified implementation across languages
+- **✨ Secure by design** - Proper key derivation and cryptographic best practices
+- **✅ Tested interoperability** - Verified compatibility between all implementations
 
 
 ## Implementations
@@ -30,23 +30,80 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 * **Ruby**: [AesBridge Ruby](https://github.com/mervick/aes-bridge-ruby)
 
 
-Each implementation provides an equivalent API interface that includes the same core methods: `encrypt_cbc`, `decrypt_cbc`, `encrypt_gcm`, `decrypt_gcm`, `encrypt_legacy`, and `decrypt_legacy`.  
-The method names and functionality are consistent across languages, while the actual API structure follows the conventions of each language.
+## Encryption Modes
 
-## Compatibility
+#### **1. GCM (Galois/Counter Mode) - AES 256 with Tag**
 
-AesBridge is **interoperable** between all supported languages. You can encrypt data in one language and decrypt in another, as long as the same mode and passphrases are used.
+* A modern mode providing both **encryption and authentication** (integrity check).
+* Generates an **authentication tag** to verify data hasn't been tampered with. Supports **Associated Data** (non-encrypted but authenticated metadata). High performance due to parallelization.
+* Recommended for most **new projects** requiring maximum security and data integrity.
 
-## Documentation
+#### **2. CBC (Cipher Block Chaining) with HMAC Verification - AES 256**
 
-Each implementation contains its own README with usage examples.
-For general concepts, check the tests in each repository for cross-language validation.
+* A time-tested mode for **encryption**, enhanced with **HMAC** for **authentication and integrity**.
+* Chained block encryption. The secure "Encrypt-then-MAC" (EtM) approach is used, where **HMAC** verifies the authenticity of the encrypted data.
 
-## Tests
 
-All implementations include unit tests, and cross-language integration tests are planned in the main repo.
+#### **3. CBC Legacy (for AES Everywhere backward compatibility)**
 
-## License
+* A specific **CBC** mode precisely mimicking the behavior of the older **AES Everywhere** library.
+* Primary purpose is **backward compatibility**. Allows decryption of data encrypted with AES Everywhere, and vice-versa. Doesn't include built-in integrity checks like GCM or CBC+HMAC, as it replicates the older behavior.
+* For new projects, using **GCM** or **CBC** with HMAC is recommended.
 
-MIT License © 2025 [Andrey Izman](https://github.com/mervick)
+## Cross-Language Compatibility
 
+All **AesBridge** implementations guarantee:
+
+1. **Identical cryptographic behavior** across all implementations
+2. **Same parameter order** (data, passphrase)
+3. **Identical output formats** (binary structure or Base64 encoding)
+4. **Matching API structure** (following language conventions)
+5. **Interoperable encrypted data** - encrypt in one language, decrypt in another
+
+
+## API Methods
+
+Each implementation provides equivalent core methods with consistent behavior across languages. Method naming follows each language's conventions while maintaining functional parity.
+
+| **Functionality**          | **Mode**      | **Format** | **snake_case**       | **camelCase**      | **Description** |
+|----------------------------|---------------|------------|----------------------|--------------------|----------------|
+| **GCM Encryption**         | GCM           | Base64     | `encrypt_gcm()`      | `encryptGcm()`     | Encrypt with GCM, return Base64 |
+| **GCM Decryption**         | GCM           | Base64     | `decrypt_gcm()`      | `decryptGcm()`     | Decrypt GCM Base64 data |
+| **GCM Binary Encryption**  | GCM           | Binary     | `encrypt_gcm_bin()`  | `encryptGcmBin()`  | Encrypt with GCM, return binary |
+| **GCM Binary Decryption**  | GCM           | Binary     | `decrypt_gcm_bin()`  | `decryptGcmBin()`  | Decrypt GCM binary data |
+| **CBC Encryption**         | CBC           | Base64     | `encrypt_cbc()`      | `encryptCbc()`     | Encrypt with CBC, return Base64 |
+| **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc()`      | `decryptCbc()`     | Decrypt CBC Base64 data |
+| **CBC Binary Encryption**  | CBC           | Base64     | `encrypt_cbc_bin()`  | `encryptCbcBin()`  | Encrypt with CBC, return binary |
+| **CBC Binary Decryption**  | CBC           | Base64     | `decrypt_cbc_bin()`  | `decryptCbcBin()`  | Decrypt CBC binary data |
+| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | `encryptLegacy()`  | OpenSSL-compatible format, return Base64 |
+| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | `decryptLegacy()`  | OpenSSL-compatible decryption (decrypts Base64 data) |
+
+#### **Language-Specific Naming Notes:**
+
+- **Python/Ruby**: Uses **snake_case** (`encrypt_gcm_bin`)
+- **JavaScript/PHP**: Uses **camelCase** (`encryptGcmBin`)
+
+Each implementation contains its own README with usage examples.  
+
+
+## **Testing & Compatibility**
+
+Each language repository includes comprehensive **automated CI tests** that verify:
+
+- Correct encryption/decryption for all supported modes (GCM, CBC, Legacy CBC)
+- Proper handling of both string and binary data inputs
+- Consistent output formats across all implementations
+
+To ensure **perfect interoperability**, all implementations share:
+
+- **Identical test data** (plaintexts and passphrases)
+- **Pre-generated encrypted samples** for all modes:
+
+The **main repository** includes **automated CI tests** that verify interoperability across all implementations by **Round-Trip Encryption/Decryption**:
+
+- Encrypts test data in **each language**  
+- Decrypts it in **every other supported language**  
+- Validates that the output matches the original input  
+
+
+This rigorous testing ensures **bit-for-bit compatibility** across all supported platforms.

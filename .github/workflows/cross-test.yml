@@ -1,4 +1,4 @@
-name: Cross Crypto Compatibility Tests
+name: Cross-Language Encryption/Decryption Tests
 
 on:
   push:

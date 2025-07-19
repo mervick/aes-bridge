@@ -24,6 +24,7 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 
 ## Implementations
 
+* **C# (.NET)**: [AesBridge .NET](https://github.com/mervick/aes-bridge-dotnet)
 * **JavaScript**: [AesBridge JS](https://github.com/mervick/aes-bridge-js)
 * **PHP**: [AesBridge PHP](https://github.com/mervick/aes-bridge-php)
 * **Python**: [AesBridge Python](https://github.com/mervick/aes-bridge-python)
@@ -65,25 +66,34 @@ All **AesBridge** implementations guarantee:
 
 Each implementation provides equivalent core methods with consistent behavior across languages. Method naming follows each language's conventions while maintaining functional parity.
 
-| **Functionality**          | **Mode**      | **Format** | **snake_case**       | **camelCase**      | **Description** |
-|----------------------------|---------------|------------|----------------------|--------------------|----------------|
-| **GCM Encryption**         | GCM           | Base64     | `encrypt_gcm()`      | `encryptGcm()`     | Encrypt with GCM, return Base64 |
-| **GCM Decryption**         | GCM           | Base64     | `decrypt_gcm()`      | `decryptGcm()`     | Decrypt GCM Base64 data |
-| **GCM Binary Encryption**  | GCM           | Binary     | `encrypt_gcm_bin()`  | `encryptGcmBin()`  | Encrypt with GCM, return binary |
-| **GCM Binary Decryption**  | GCM           | Binary     | `decrypt_gcm_bin()`  | `decryptGcmBin()`  | Decrypt GCM binary data |
-| **CBC Encryption**         | CBC           | Base64     | `encrypt_cbc()`      | `encryptCbc()`     | Encrypt with CBC, return Base64 |
-| **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc()`      | `decryptCbc()`     | Decrypt CBC Base64 data |
-| **CBC Binary Encryption**  | CBC           | Base64     | `encrypt_cbc_bin()`  | `encryptCbcBin()`  | Encrypt with CBC, return binary |
-| **CBC Binary Decryption**  | CBC           | Base64     | `decrypt_cbc_bin()`  | `decryptCbcBin()`  | Decrypt CBC binary data |
-| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | `encryptLegacy()`  | AES Everywhere legacy format, return Base64 |
-| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | `decryptLegacy()`  | AES Everywhere legacy decryption (decrypts Base64 data) |
+| **Functionality**          | **Mode**      | **Format** | **Base name** *      | **Description** |
+|----------------------------|---------------|------------|----------------------|----------------|
+| **GCM Encryption**         | GCM           | Base64     | `encrypt_gcm()`      | Encrypt with GCM, return Base64 |
+| **GCM Decryption**         | GCM           | Base64     | `decrypt_gcm()`      | Decrypt GCM Base64 data |
+| **GCM Binary Encryption**  | GCM           | Binary     | `encrypt_gcm_bin()`  | Encrypt with GCM, return binary |
+| **GCM Binary Decryption**  | GCM           | Binary     | `decrypt_gcm_bin()`  | Decrypt GCM binary data |
+| **CBC Encryption**         | CBC           | Base64     | `encrypt_cbc()`      | Encrypt with CBC, return Base64 |
+| **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc()`      | Decrypt CBC Base64 data |
+| **CBC Binary Encryption**  | CBC           | Base64     | `encrypt_cbc_bin()`  | Encrypt with CBC, return binary |
+| **CBC Binary Decryption**  | CBC           | Base64     | `decrypt_cbc_bin()`  | Decrypt CBC binary data |
+| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | AES Everywhere legacy format, return Base64 |
+| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | AES Everywhere legacy decryption (decrypts Base64 data) |
 
-#### **Language-Specific Naming Notes:**
+\* **Language-Specific Naming Notes:**
 
-- **Python, Ruby**: Uses **snake_case** (`encrypt_gcm_bin`)
-- **JavaScript, PHP**: Uses **camelCase** (`encryptGcmBin`)
+**Base name** shows the core functionality in **snake_case** format, but actual implementations follow language-specific conventions, for example:
+- **C#**: `AesBridge.Gcm.EncryptBin()`
+- **Java**: `AesBridge.Gcm.encryptBin()`
+- **JavaScript**: `encryptGcmBin()`
+- **PHP**: `AesBridge\Gcm::encryptBin()`
+- **Python**: `encrypt_gcm_bin()`
+- **Ruby**: `AesBridge.encrypt_gcm_bin()`
 
-Each implementation contains its own README with usage examples.  
+Each language implementation maintains its own idiomatic structure including:
+- Namespace/class organization
+- Case conventions (camelCase, PascalCase, snake_case)
+
+Each implementation contains its own README with exact syntax and usage examples.  
 
 
 ## **Testing & Compatibility**

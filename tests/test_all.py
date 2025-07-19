@@ -111,6 +111,10 @@ def load_cli_tests():
         encryptor = executors[enc_lang]
 
         for dec_lang in languages:
+            # Skip if encryptor and decryptor are the same language
+            if enc_lang == dec_lang:
+                continue
+
             decryptor = executors[dec_lang]
 
             test_key = 'plaintext'

@@ -3,6 +3,7 @@
 ![NPM Version](https://img.shields.io/npm/v/aes-bridge.svg)
 ![PyPI Version](https://img.shields.io/pypi/v/aes-bridge.svg)
 ![Gem Version](https://img.shields.io/gem/v/aes-bridge.svg)
+![NuGet Version](https://img.shields.io/nuget/v/AesBridge.svg)
 ![Packagist Version](https://img.shields.io/packagist/v/mervick/aes-bridge.svg)  
 ![CI Status](https://github.com/mervick/aes-bridge/actions/workflows/cross-test.yml/badge.svg)
 

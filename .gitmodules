@@ -11,5 +11,5 @@
 	path = aes-bridge-ruby
 	url = https://github.com/mervick/aes-bridge-ruby
 [submodule "aes-bridge-dotnet"]
-	path = aes-bridge-ruby
+	path = aes-bridge-dotnet
 	url = https://github.com/mervick/aes-bridge-dotnet

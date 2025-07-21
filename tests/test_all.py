@@ -80,7 +80,11 @@ class CliExecutor:
 
 def load_cli_tests():
     # Load configuration
-    with open('tests/cli_config.json', 'r') as f:
+    local_config = "tests/cli_config_local.json"
+    default_config = "tests/cli_config.json"
+    config_path = local_config if os.path.exists(local_config) else default_config
+
+    with open(config_path, 'r') as f:
         config = json.load(f)
 
     # Load test data
@@ -118,19 +122,23 @@ def load_cli_tests():
             decryptor = executors[dec_lang]
 
             test_key = 'plaintext'
-            for idx, test_text in enumerate(test_data.get('testdata', {}).get('plaintext', [])):
-                if len(test_text) > 0:
-                    add_test(f"test_cbc_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_cbc, decryptor.decrypt_cbc, test_text, passphrase)
-                    add_test(f"test_gcm_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
-                    add_test(f"test_legacy_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
+            # join all tests data
+            test_text = "\n".join(test_data.get('testdata', {}).get('plaintext', []))
+            # for idx, test_text in enumerate(test_data.get('testdata', {}).get('plaintext', [])):
+            if len(test_text) > 0:
+                add_test(f"test_cbc__encrypt_{enc_lang}__decrypt_{dec_lang}__{test_key}", test_encrypt_decrypt, encryptor.encrypt_cbc, decryptor.decrypt_cbc, test_text, passphrase)
+                add_test(f"test_gcm__encrypt_{enc_lang}__decrypt_{dec_lang}__{test_key}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
+                add_test(f"test_legacy__encrypt_{enc_lang}__decrypt_{dec_lang}__{test_key}", test_encrypt_decrypt, encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
 
             test_key = 'hex'
-            for idx, hex_text in enumerate(test_data.get('testdata', {}).get('hex', [])):
-                test_text = bytes.fromhex(hex_text)
-                if len(test_text) > 0:
-                    add_test(f"test_cbc_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_cbc, decryptor.decrypt_cbc, test_text, passphrase)
-                    add_test(f"test_gcm_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
-                    add_test(f"test_legacy_encrypt_{enc_lang}_decrypt_{dec_lang}_{test_key}_{idx}", test_encrypt_decrypt,encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
+            # join all tests data
+            hex_text = "".join(test_data.get('testdata', {}).get('hex', []))
+            # for idx, hex_text in enumerate(test_data.get('testdata', {}).get('hex', [])):
+            test_text = bytes.fromhex(hex_text)
+            if len(test_text) > 0:
+                add_test(f"test_cbc__encrypt_{enc_lang}__decrypt_{dec_lang}__{test_key}", test_encrypt_decrypt, encryptor.encrypt_cbc, decryptor.decrypt_cbc, test_text, passphrase)
+                add_test(f"test_gcm__encrypt_{enc_lang}__decrypt_{dec_lang}__{test_key}", test_encrypt_decrypt, encryptor.encrypt_gcm, decryptor.decrypt_gcm, test_text, passphrase)
+                add_test(f"test_legacy__encrypt_{enc_lang}__decrypt_{dec_lang}__{test_key}", test_encrypt_decrypt,encryptor.encrypt_legacy, decryptor.decrypt_legacy, test_text, passphrase)
 
 load_cli_tests()
 

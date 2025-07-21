@@ -14,5 +14,9 @@
     "ruby": {
         "path": "aes-bridge-ruby/cli.rb",
         "executor": "ruby"
+    },
+    "dotnet": {
+        "path": "aes-bridge-dotnet/Cli/bin/Release/net8.0/AesBridgeCli.dll",
+        "executor": "dotnet"
     }
 }

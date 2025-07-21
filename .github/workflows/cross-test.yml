@@ -27,6 +27,11 @@ jobs:
           echo "Attempting to update submodules to their latest remote versions..."
           git submodule update --init --recursive --remote --merge || { echo "::warning::Submodule update failed for some reason."; }
 
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
       - name: Install NPM dependencies
         working-directory: ./aes-bridge-js
         run: npm ci
@@ -53,16 +58,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Setup .NET 8.0
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
-
       - name: Install .NET dependencies
+        working-directory: ./aes-bridge-dotnet
         run: dotnet restore
 
       - name: Build dotnet Cli
-        run: dotnet build --configuration Release --project aes-bridge-dotnet/Cli
+        working-directory: ./aes-bridge-dotnet/Cli
+        run: dotnet build --configuration Release
 
       - name: Run tests
         run: |

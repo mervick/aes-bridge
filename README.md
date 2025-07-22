@@ -26,6 +26,7 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 ## Implementations
 
 * **C# (.NET)**: [AesBridge .NET](https://github.com/mervick/aes-bridge-dotnet)
+* **Go**: [AesBridge Go](https://github.com/mervick/aes-bridge-go)
 * **JavaScript**: [AesBridge JS](https://github.com/mervick/aes-bridge-js)
 * **PHP**: [AesBridge PHP](https://github.com/mervick/aes-bridge-php)
 * **Python**: [AesBridge Python](https://github.com/mervick/aes-bridge-python)
@@ -84,6 +85,7 @@ Each implementation provides equivalent core methods with consistent behavior ac
 
 **Base name** shows the core functionality in **snake_case** format, but actual implementations follow language-specific conventions, for example:
 - **C#**: `AesBridge.Gcm.EncryptBin()`
+- **Go**: `aesbridge.EncryptGCMBin()`
 - **Java**: `AesBridge.Gcm.encryptBin()`
 - **JavaScript**: `encryptGcmBin()`
 - **PHP**: `AesBridge\Gcm::encryptBin()`

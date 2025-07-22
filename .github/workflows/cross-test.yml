@@ -70,14 +70,19 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.23'
-          cache: true
 
-      # - name: Download Go modules
-      #   working-directory: ./aes-bridge-go
-      #   run: go mod download
+      - name: Download Go modules
+        working-directory: ./aes-bridge-go
+        run: |
+          go mod download
+          go mod verify
 
       - name: Build Go module
         working-directory: ./aes-bridge-go
+        run: go build
+
+      - name: Build Go module
+        working-directory: ./aes-bridge-go/cli
         run: go build
 
       - name: Run tests

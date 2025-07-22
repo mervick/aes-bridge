@@ -20,8 +20,8 @@
         "executor": "dotnet"
     },
     "go": {
-        "path": "../aes-bridge-go/cli/main.go",
-        "working_directory": "../aes-bridge-go",
+        "path": "cli/main.go",
+        "working_directory": "aes-bridge-go",
         "executor": "go run"
     }
 }

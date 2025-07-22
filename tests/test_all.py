@@ -56,6 +56,8 @@ class CliExecutor:
                    "--b64"])
         result = run_command(command, cwd=self.working_directory)
 
+        print(f"\nResult: {result}\n")
+
         if action == "decrypt":
             result = base64.b64decode(result)
         return result

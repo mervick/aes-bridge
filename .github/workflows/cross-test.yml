@@ -72,11 +72,12 @@ jobs:
           go-version: '1.23'
           cache: true
 
-      - name: Download Go modules
-        working-directory: ./aes-bridge-go
-        run: go mod download
+      # - name: Download Go modules
+      #   working-directory: ./aes-bridge-go
+      #   run: go mod download
 
       - name: Build Go module
+        working-directory: ./aes-bridge-go
         run: go build
 
       - name: Run tests

@@ -69,12 +69,15 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.24'
+          go-version: '1.23'
           cache: true
 
       - name: Download Go modules
         working-directory: ./aes-bridge-go
         run: go mod download
+
+      - name: Build Go module
+        run: go build
 
       - name: Run tests
         run: |

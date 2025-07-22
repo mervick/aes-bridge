@@ -10,9 +10,9 @@ current_dir = os.path.dirname(__file__)
 project_root = os.path.abspath(os.path.join(current_dir, '..'))
 
 # Function to run a command and return stdout
-def run_command(command_parts):
+def run_command(command_parts, cwd=None):
     try:
-        result = subprocess.run(command_parts, capture_output=True, text=True, check=True)
+        result = subprocess.run(command_parts, capture_output=True, text=True, check=True, cwd=cwd)
         return result.stdout.strip()
     except subprocess.CalledProcessError as e:
         print(f"Error running command: {' '.join(command_parts)}")
@@ -36,10 +36,11 @@ def to_str(s: str | bytes):
     return s.decode('utf-8') if isinstance(s, bytes) else s
 
 class CliExecutor:
-    def __init__(self, language: str, path: str, executor: str):
+    def __init__(self, language: str, path: str, executor: str, working_directory = None):
         self.language = language
         self.path = os.path.join(project_root, path)
         self.executor = executor
+        self.working_directory = working_directory
 
     def execute(self, action: Literal["encrypt", "decrypt"], mode: Literal["gcm", "cbc", "legacy"], data: bytes | str, passphrase: bytes | str):
         data = to_bytes(data)
@@ -47,13 +48,13 @@ class CliExecutor:
         if action == "encrypt":
             data = base64.b64encode(data)
 
-        command = [self.executor, self.path,
+        command = list(self.executor.split() + [self.path,
                    action,
                    "--mode", mode,
                    "--data", to_str(data),
                    "--passphrase", to_str(passphrase),
-                   "--b64"]
-        result = run_command(command)
+                   "--b64"])
+        result = run_command(command, cwd=self.working_directory)
 
         if action == "decrypt":
             result = base64.b64decode(result)
@@ -108,7 +109,7 @@ def load_cli_tests():
 
     for lang in languages:
         lang_config = config[lang]
-        executor = CliExecutor(lang, lang_config['path'], lang_config['executor'])
+        executor = CliExecutor(lang, lang_config['path'], lang_config['executor'], lang_config.get('working_directory'))
         executors[lang] = executor
 
     for enc_lang in languages:

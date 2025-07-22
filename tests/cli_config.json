@@ -18,5 +18,10 @@
     "dotnet": {
         "path": "aes-bridge-dotnet/Cli/bin/Release/net8.0/AesBridgeCli.dll",
         "executor": "dotnet"
+    },
+    "go": {
+        "path": "../aes-bridge-go/cli/main.go",
+        "working_directory": "../aes-bridge-go",
+        "executor": "go run"
     }
 }

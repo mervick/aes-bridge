@@ -16,3 +16,6 @@
 [submodule "aes-bridge-go"]
 	path = aes-bridge-go
 	url = https://github.com/mervick/aes-bridge-go
+[submodule "aes-bridge-cpp"]
+	path = aes-bridge-cpp
+	url = https://github.com/mervick/aes-bridge-cpp

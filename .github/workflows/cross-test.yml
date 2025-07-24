@@ -21,6 +21,21 @@ jobs:
           fetch-depth: 0
           submodules: true
 
+      - name: Disable man-db auto-update and reconfigure (speedup)
+        run: |
+          echo "set man-db/auto-update false" | sudo debconf-communicate
+          sudo dpkg-reconfigure man-db
+          sudo tee /etc/dpkg/dpkg.cfg.d/01_nodoc > /dev/null << 'EOF'
+          path-exclude /usr/share/doc/*
+          path-exclude /usr/share/man/*
+          path-exclude /usr/share/info/*
+          EOF
+
+      - name: Install cmake
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+
       - name: Update submodules to their latest remote versions
         id: update_step
         run: |
@@ -62,28 +77,29 @@ jobs:
         working-directory: ./aes-bridge-dotnet
         run: dotnet restore
 
-      - name: Build dotnet Cli
+      - name: Build dotnet AesBridge CLI
         working-directory: ./aes-bridge-dotnet/Cli
         run: dotnet build --configuration Release
 
-      - name: Set up Go
+      - name: Set up GO
         uses: actions/setup-go@v4
         with:
           go-version: '1.23'
 
-      - name: Download Go modules
+      - name: Download GO modules
         working-directory: ./aes-bridge-go
         run: |
           go mod download
           go mod verify
 
-      - name: Build Go module
+      - name: Build GO AesBridge CLI
         working-directory: ./aes-bridge-go
         run: go build
 
-      - name: Build Go module
-        working-directory: ./aes-bridge-go/cli
-        run: go build
+      - name: Build C++ AesBridge CLI
+        run: |
+          cmake . -DBUILD_AESBRIDGE_CLI=ON
+          make
 
       - name: Run tests
         run: |

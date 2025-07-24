@@ -38,7 +38,7 @@ def to_str(s: str | bytes):
 class CliExecutor:
     def __init__(self, language: str, path: str, executor: str, working_directory = None):
         self.language = language
-        self.path = os.path.join(project_root, path)
+        self.path = os.path.join(project_root, path) if len(path) > 0 else ""
         self.executor = executor
         self.working_directory = working_directory
 
@@ -48,8 +48,9 @@ class CliExecutor:
         if action == "encrypt":
             data = base64.b64encode(data)
 
-        command = list(self.executor.split() + [self.path,
-                   action,
+        command = list(self.executor.split() +
+                  ([self.path] if len(self.path) > 0 else []) +
+                  [ action,
                    "--mode", mode,
                    "--data", to_str(data),
                    "--passphrase", to_str(passphrase),
@@ -109,7 +110,7 @@ def load_cli_tests():
 
     for lang in languages:
         lang_config = config[lang]
-        executor = CliExecutor(lang, lang_config['path'], lang_config['executor'], lang_config.get('working_directory'))
+        executor = CliExecutor(lang, lang_config.get('path', ""), lang_config['executor'], lang_config.get('working_directory'))
         executors[lang] = executor
 
     for enc_lang in languages:

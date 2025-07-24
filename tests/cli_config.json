@@ -23,5 +23,9 @@
         "path": "aes-bridge-go/cli/main.go",
         "working_directory": "aes-bridge-go",
         "executor": "go run"
+    },
+    "cpp": {
+        "path": "",
+        "executor": "./aes-bridge-cpp/cli/cli"
     }
 }

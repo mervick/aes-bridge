@@ -16,7 +16,7 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 ## Features
 
 - **🛡️ AES-256 encryption** - Industry-standard 256-bit encryption
-- **🔐 Multiple modes** - **CBC** and **GCM**
+- **🔐 Multiple modes** - **GCM** and **CBC with HMAC**
 - **↩️ Legacy CBC** - For backward compatibility with projects using **AES Everywhere**.
 - **🌍 Cross-language compatibility** - Unified implementation across languages
 - **✨ Secure by design** - Proper key derivation and cryptographic best practices

@@ -97,6 +97,7 @@ jobs:
         run: go build
 
       - name: Build C++ AesBridge CLI
+        working-directory: ./aes-bridge-cpp
         run: |
           cmake . -DBUILD_AESBRIDGE_CLI=ON
           make

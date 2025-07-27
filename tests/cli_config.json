@@ -27,5 +27,9 @@
     "cpp": {
         "path": "",
         "executor": "./aes-bridge-cpp/cli/cli"
+    },
+    "java": {
+        "path": "./aes-bridge-java/cli/target/cli.jar",
+        "executor": "java -jar"
     }
 }

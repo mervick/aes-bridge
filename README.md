@@ -28,7 +28,7 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 * **C++**: [AesBridge CPP](https://github.com/mervick/aes-bridge-cpp)
 * **C# (.NET)**: [AesBridge .NET](https://github.com/mervick/aes-bridge-dotnet)
 * **GO**: [AesBridge GO](https://github.com/mervick/aes-bridge-go)
-* **Java**: [AesBridge JAVA](https://github.com/mervick/aes-bridge-java)
+* **Java**: [AesBridge Java](https://github.com/mervick/aes-bridge-java)
 * **JavaScript**: [AesBridge JS](https://github.com/mervick/aes-bridge-js)
 * **PHP**: [AesBridge PHP](https://github.com/mervick/aes-bridge-php)
 * **Python**: [AesBridge Python](https://github.com/mervick/aes-bridge-python)

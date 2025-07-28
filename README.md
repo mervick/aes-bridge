@@ -1,11 +1,12 @@
 # AesBridge
 
-![NPM Version](https://img.shields.io/npm/v/aes-bridge.svg)
-![PyPI Version](https://img.shields.io/pypi/v/aes-bridge.svg)
-![Gem Version](https://img.shields.io/gem/v/aes-bridge.svg)
-![NuGet Version](https://img.shields.io/nuget/v/AesBridge.svg)
-![Packagist Version](https://img.shields.io/packagist/v/mervick/aes-bridge.svg)  
-![CI Status](https://github.com/mervick/aes-bridge/actions/workflows/cross-test.yml/badge.svg)
+[![NPM Version](https://img.shields.io/npm/v/aes-bridge.svg)](https://www.npmjs.com/package/aes-bridge)
+[![PyPI Version](https://img.shields.io/pypi/v/aes-bridge.svg)](https://pypi.org/project/aes-bridge/)
+[![Gem Version](https://img.shields.io/gem/v/aes-bridge.svg)](https://rubygems.org/gems/aes-bridge/versions/2.0.0)
+[![NuGet Version](https://img.shields.io/nuget/v/AesBridge.svg)](https://www.nuget.org/packages/AesBridge)
+[![Packagist Version](https://img.shields.io/packagist/v/mervick/aes-bridge.svg)](https://packagist.org/packages/mervick/aes-bridge)
+[![Maven Central](https://img.shields.io/maven-central/v/dev.mervick.aesbridge/aes-bridge.svg)](https://central.sonatype.com/artifact/dev.mervick.aesbridge/aes-bridge)  
+[![CI Status](https://github.com/mervick/aes-bridge/actions/workflows/cross-test.yml/badge.svg)](https://github.com/mervick/aes-bridge/actions/workflows/cross-test.yml)
 
 
 **AesBridge** is a modern, secure and cross-language AES encryption library that supports **CBC**, **GCM**, and **Legacy CBC** modes.

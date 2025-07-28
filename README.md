@@ -95,10 +95,6 @@ Each implementation provides equivalent core methods with consistent behavior ac
 - **Python**: `encrypt_gcm_bin()`
 - **Ruby**: `AesBridge.encrypt_gcm_bin()`
 
-Each language implementation maintains its own idiomatic structure including:
-- Namespace/class organization
-- Case conventions (camelCase, PascalCase, snake_case)
-
 Each implementation contains its own README with exact syntax and usage examples.  
 
 

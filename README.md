@@ -20,7 +20,8 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 - **🔐 Multiple modes** - **GCM** and **CBC** with HMAC
 - **🔄 Legacy CBC** - For backward compatibility with projects using **AES Everywhere**.
 - **🌍 Cross-language compatibility** - Unified implementation across languages
-- **✨ Secure by design** - Proper key derivation and cryptographic best practices
+- **✨ Secure defaults** - Modern modes use secure key derivation and cryptographic best practices
+- **⭐ Authenticated encryption** - **GCM** and **CBC+HMAC** modes provide integrity checking and tamper protection
 - **✅ Tested interoperability** - Verified compatibility between all implementations
 
 
@@ -41,10 +42,10 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 The following table compares the different encryption modes available in **AesBridge**, including their cryptographic primitives, key derivation, and output formats.
 
 | Mode           | Cipher      | Hash Algo      | KDF             | Iterations | Output Structure                             | Authentication          |
-|----------------|-------------|----------------|-----------------|------------|----------------------------------------------|-------------------------|
+|:--------------:|-------------|----------------|-----------------|------------|----------------------------------------------|-------------------------|
 | **GCM**        | AES-256-GCM | SHA256         | PBKDF2          | 100,000    | salt(16) + nonce(12) + ciphertext + tag(16)  | GCM Tag (16 bytes)      |
 | **CBC**        | AES-256-CBC | SHA256         | PBKDF2          | 100,000    | salt(16) + iv(16) + ciphertext + hmac(32)    | HMAC-SHA256 (32 bytes)  |
-| **Legacy CBC** | AES-256-CBC | MD5            | Iterative MD5   | N/A        | 'Salted__' + salt(8) + ciphertext            | None                    |
+| **Legacy CBC** (deprecated) | AES-256-CBC | MD5            | Iterative MD5   | N/A        | 'Salted__' + salt(8) + ciphertext            | None                    |
 
 
 #### Notes on the Table:
@@ -65,7 +66,7 @@ This comparison highlights the security improvements in modern modes (GCM and CB
 
 - **AES-256-CBC with HMAC:** A proven mode for block encryption, enhanced with HMAC for authentication and integrity. It uses a secure Encrypt-then-MAC approach to verify data authenticity. Suitable for applications needing reliable encryption with explicit integrity verification.
 
-- **Legacy CBC** (backward compatibility): Replicates the behavior of older libraries like AES Everywhere for decrypting legacy data. It lacks built-in authentication, making it **less secure**; use only for compatibility, not new encryption.
+- **Legacy CBC** (backward compatibility): **Do not use for encrypting new data.** Replicates the behavior of older libraries like AES Everywhere for decrypting legacy data. It lacks built-in authentication, making it **not secure**; use only for compatibility, not new encryption. 
 
 
 ## API Methods
@@ -82,7 +83,7 @@ Each implementation provides equivalent core methods with consistent behavior ac
 | `decrypt_cbc()`      | CBC           | Base64     | Decrypt CBC Base64-encoded data |
 | `encrypt_cbc_bin()`  | CBC           | Binary     | Encrypt with CBC, return binary |
 | `decrypt_cbc_bin()`  | CBC           | Binary     | Decrypt CBC binary data |
-| `encrypt_legacy()`   | Legacy CBC    | Base64     | Encrypt with AES Everywhere legacy format, return Base64-encoded |
+| `encrypt_legacy()`   | Legacy CBC    | Base64     | **Do not use for encrypting new data.**  Encrypt with AES Everywhere legacy format, return Base64-encoded.  |
 | `decrypt_legacy()`   | Legacy CBC    | Base64     | Decrypt with AES Everywhere legacy format, decrypts Base64-encoded data |
 
 
@@ -97,6 +98,16 @@ Each implementation provides equivalent core methods with consistent behavior ac
 
 Each implementation contains its own README with exact syntax and usage examples.  
 
+
+> ## ⚠️ Legacy encryption warning
+> This library provides full compatibility with the legacy **AES Everywhere** formats, including insecure cryptographic constructions. These are provided only to allow decryption of historical data.  
+We strongly discourage their use for any new encryption.
+
+## Security Recommendations
+
+- 🔒 Use **GCM** or **CBC with HMAC-SHA256** for new encryption
+- 🔑 Always use a **strong passphrase**; weak passwords reduce encryption security
+- ⚠️ **Never** use **Legacy CBC** mode unless decrypting old AES Everywhere data
 
 ## Cross-Language Compatibility
 
@@ -129,3 +140,8 @@ The **main repository** includes **automated CI tests** that verify interoperabi
 
 
 This rigorous testing ensures **bit-for-bit compatibility** across all supported platforms.
+
+## Why not just use libsodium or OpenSSL directly?
+
+**AesBridge** provides consistent, secure, and interoperable encryption across many languages, removing the need to reimplement crypto logic per platform. While libsodium/OpenSSL are great tools, they often differ in output formats, parameter ordering, and defaults. AesBridge solves that pain point.
+

@@ -72,18 +72,18 @@ This comparison highlights the security improvements in modern modes (GCM and CB
 
 Each implementation provides equivalent core methods with consistent behavior across languages. Method naming follows each language's conventions while maintaining functional parity.
 
-| **Base name**        | **Functionality**          | **Mode**      | **Format** | **Description** |
-|----------------------|----------------------------|---------------|------------|----------------|
-| `encrypt_gcm()`      | **Encryption**             | GCM           | Base64     | Encrypt with GCM, return Base64-encoded |
-| `decrypt_gcm()`      | **Decryption**             | GCM           | Base64     | Decrypt GCM Base64-encoded data |
-| `encrypt_gcm_bin()`  | **Encryption**             | GCM           | Binary     | Encrypt with GCM, return binary |
-| `decrypt_gcm_bin()`  | **Decryption**             | GCM           | Binary     | Decrypt GCM binary data |
-| `encrypt_cbc()`      | **Encryption**             | CBC           | Base64     | Encrypt with CBC, return Base64-encoded |
-| `decrypt_cbc()`      | **Decryption**             | CBC           | Base64     | Decrypt CBC Base64-encoded data |
-| `encrypt_cbc_bin()`  | **Encryption**             | CBC           | Binary     | Encrypt with CBC, return binary |
-| `decrypt_cbc_bin()`  | **Decryption**             | CBC           | Binary     | Decrypt CBC binary data |
-| `encrypt_legacy()`   | **Encryption**             | Legacy CBC    | Base64     | Encrypt with AES Everywhere legacy format, return Base64-encoded |
-| `decrypt_legacy()`   | **Decryption**             | Legacy CBC    | Base64     | Decrypt with AES Everywhere legacy format, decrypts Base64-encoded data |
+| **Base name**        | **Functionality**        | **Mode**      | **Format** | **Description** |
+|----------------------|--------------------------|---------------|------------|----------------|
+| `encrypt_gcm()`      | Encryption               | GCM           | Base64     | Encrypt with GCM, return Base64-encoded |
+| `decrypt_gcm()`      | Decryption               | GCM           | Base64     | Decrypt GCM Base64-encoded data |
+| `encrypt_gcm_bin()`  | Encryption               | GCM           | Binary     | Encrypt with GCM, return binary |
+| `decrypt_gcm_bin()`  | Decryption               | GCM           | Binary     | Decrypt GCM binary data |
+| `encrypt_cbc()`      | Encryption               | CBC           | Base64     | Encrypt with CBC, return Base64-encoded |
+| `decrypt_cbc()`      | Decryption               | CBC           | Base64     | Decrypt CBC Base64-encoded data |
+| `encrypt_cbc_bin()`  | Encryption               | CBC           | Binary     | Encrypt with CBC, return binary |
+| `decrypt_cbc_bin()`  | Decryption               | CBC           | Binary     | Decrypt CBC binary data |
+| `encrypt_legacy()`   | Encryption               | Legacy CBC    | Base64     | Encrypt with AES Everywhere legacy format, return Base64-encoded |
+| `decrypt_legacy()`   | Decryption               | Legacy CBC    | Base64     | Decrypt with AES Everywhere legacy format, decrypts Base64-encoded data |
 
 
 **Base name** in the table shows the core functionality in **snake_case** format, but actual implementations follow language-specific conventions, for example:

@@ -17,8 +17,8 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 ## Features
 
 - **🛡️ AES-256 encryption** - Industry-standard 256-bit encryption
-- **🔐 Multiple modes** - **GCM** and **CBC with HMAC**
-- **↩️ Legacy CBC** - For backward compatibility with projects using **AES Everywhere**.
+- **🔐 Multiple modes** - **GCM** and **CBC** with HMAC
+- **🔄 Legacy CBC** - For backward compatibility with projects using **AES Everywhere**.
 - **🌍 Cross-language compatibility** - Unified implementation across languages
 - **✨ Secure by design** - Proper key derivation and cryptographic best practices
 - **✅ Tested interoperability** - Verified compatibility between all implementations
@@ -38,55 +38,55 @@ It is the spiritual successor of the [AES Everywhere](https://github.com/mervick
 
 ## Encryption Modes
 
-#### **1. GCM (Galois/Counter Mode) - AES 256 with Tag**
+The following table compares the different encryption modes available in **AesBridge**, including their cryptographic primitives, key derivation, and output formats.
 
-* A modern mode providing both **encryption and authentication** (integrity check).
-* Generates an **authentication tag** to verify data hasn't been tampered with. Supports **Associated Data** (non-encrypted but authenticated metadata). High performance due to parallelization.
-* Recommended for most **new projects** requiring maximum security and data integrity.
-
-#### **2. CBC (Cipher Block Chaining) with HMAC Verification - AES 256**
-
-* A time-tested mode for **encryption**, enhanced with **HMAC** for **authentication and integrity**.
-* Chained block encryption. The secure "Encrypt-then-MAC" (EtM) approach is used, where **HMAC** verifies the authenticity of the encrypted data.
+| Mode           | Cipher      | Hash Algo      | KDF             | Iterations | Output Structure                             | Authentication          |
+|----------------|-------------|----------------|-----------------|------------|----------------------------------------------|-------------------------|
+| **GCM**        | AES-256-GCM | SHA256         | PBKDF2          | 100,000    | salt(16) + nonce(12) + ciphertext + tag(16)  | GCM Tag (16 bytes)      |
+| **CBC**        | AES-256-CBC | SHA256         | PBKDF2          | 100,000    | salt(16) + iv(16) + ciphertext + hmac(32)    | HMAC-SHA256 (32 bytes)  |
+| **Legacy CBC** | AES-256-CBC | MD5            | Iterative MD5   | N/A        | 'Salted__' + salt(8) + ciphertext            | None                    |
 
 
-#### **3. CBC Legacy (for AES Everywhere backward compatibility)**
+#### Notes on the Table:
+- **Mode**: The encryption mode used.
+- **Cipher**: The underlying AES variant.
+- **Hash Algo**: The hash function used in key derivation or authentication.
+- **KDF**: Key Derivation Function.
+- **Iterations**: Number of iterations for key derivation (N/A for legacy mode as it uses a custom iterative MD5 approach).
+- **Output Structure**: The binary format of the encrypted data (before optional base64 encoding). Note that in legacy mode, the IV is derived and not explicitly stored in the output.
+- **Authentication**: Mechanism for integrity and authenticity checking. Legacy mode lacks authentication, making it vulnerable to tampering.
 
-* **CBC** mode precisely mimicking the behavior of the older **AES Everywhere** library.
-* Primary purpose is **backward compatibility**. Allows decryption of data encrypted with AES Everywhere, and vice-versa. Doesn't include built-in integrity checks like GCM or CBC+HMAC, as it replicates the older behavior.
-* For new projects, using **GCM** or **CBC** with HMAC is recommended.
 
-## Cross-Language Compatibility
+### Mode Details
 
-All **AesBridge** implementations guarantee:
+This comparison highlights the security improvements in modern modes (GCM and CBC) over the legacy mode, which is provided for compatibility purposes only. It is recommended to use GCM or CBC for new applications.
 
-- **Identical cryptographic behavior** across all implementations
-- **Same parameter order** (data, passphrase)
-- **Identical output formats** (binary structure or Base64 encoding)
-- **Matching API structure** (following language conventions)
-- **Interoperable encrypted data** - encrypt in one language, decrypt in another
+- **AES-256-GCM:** A modern mode providing both encryption and built-in authentication via a tag for integrity checks. It supports associated data (non-encrypted but authenticated metadata) and offers high performance through parallelization. Best for new projects requiring maximum security and efficiency.
+
+- **AES-256-CBC with HMAC:** A proven mode for block encryption, enhanced with HMAC for authentication and integrity. It uses a secure Encrypt-then-MAC approach to verify data authenticity. Suitable for applications needing reliable encryption with explicit integrity verification.
+
+- **Legacy CBC** (backward compatibility): Replicates the behavior of older libraries like AES Everywhere for decrypting legacy data. It lacks built-in authentication, making it **less secure**; use only for compatibility, not new encryption.
 
 
 ## API Methods
 
 Each implementation provides equivalent core methods with consistent behavior across languages. Method naming follows each language's conventions while maintaining functional parity.
 
-| **Functionality**          | **Mode**      | **Format** | **Base name** *      | **Description** |
+| **Functionality**          | **Mode**      | **Format** | **Base name**        | **Description** |
 |----------------------------|---------------|------------|----------------------|----------------|
-| **GCM Encryption**         | GCM           | Base64     | `encrypt_gcm()`      | Encrypt with GCM, return Base64 |
-| **GCM Decryption**         | GCM           | Base64     | `decrypt_gcm()`      | Decrypt GCM Base64 data |
-| **GCM Binary Encryption**  | GCM           | Binary     | `encrypt_gcm_bin()`  | Encrypt with GCM, return binary |
-| **GCM Binary Decryption**  | GCM           | Binary     | `decrypt_gcm_bin()`  | Decrypt GCM binary data |
-| **CBC Encryption**         | CBC           | Base64     | `encrypt_cbc()`      | Encrypt with CBC, return Base64 |
-| **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc()`      | Decrypt CBC Base64 data |
-| **CBC Binary Encryption**  | CBC           | Base64     | `encrypt_cbc_bin()`  | Encrypt with CBC, return binary |
-| **CBC Binary Decryption**  | CBC           | Base64     | `decrypt_cbc_bin()`  | Decrypt CBC binary data |
-| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | AES Everywhere legacy format, return Base64 |
-| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | AES Everywhere legacy decryption (decrypts Base64 data) |
+| **GCM Encryption**         | GCM           | Base64     | `encrypt_gcm()`      | Encrypt with GCM, return Base64-encoded |
+| **GCM Decryption**         | GCM           | Base64     | `decrypt_gcm()`      | Decrypt GCM Base64-encoded data |
+| **GCM Encryption**         | GCM           | Binary     | `encrypt_gcm_bin()`  | Encrypt with GCM, return binary |
+| **GCM Decryption**         | GCM           | Binary     | `decrypt_gcm_bin()`  | Decrypt GCM binary data |
+| **CBC Encryption**         | CBC           | Base64     | `encrypt_cbc()`      | Encrypt with CBC, return Base64-encoded |
+| **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc()`      | Decrypt CBC Base64-encoded data |
+| **CBC Encryption**         | CBC           | Base64     | `encrypt_cbc_bin()`  | Encrypt with CBC, return binary |
+| **CBC Decryption**         | CBC           | Base64     | `decrypt_cbc_bin()`  | Decrypt CBC binary data |
+| **Legacy Encryption**      | Legacy CBC    | Base64     | `encrypt_legacy()`   | Encrypt with AES Everywhere legacy format, return Base64-encoded |
+| **Legacy Decryption**      | Legacy CBC    | Base64     | `decrypt_legacy()`   | Decrypt with AES Everywhere legacy format, decrypts Base64-encoded data |
 
-\* **Language-Specific Naming Notes:**
 
-**Base name** shows the core functionality in **snake_case** format, but actual implementations follow language-specific conventions, for example:
+**Base name** in the table shows the core functionality in **snake_case** format, but actual implementations follow language-specific conventions, for example:
 - **C#**: `AesBridge.Gcm.EncryptBin()`
 - **Go**: `aesbridge.EncryptGCMBin()`
 - **Java**: `AesBridge.GCM.encryptBin()`
@@ -101,6 +101,16 @@ Each language implementation maintains its own idiomatic structure including:
 
 Each implementation contains its own README with exact syntax and usage examples.  
 
+
+## Cross-Language Compatibility
+
+All **AesBridge** implementations guarantee:
+
+- **Identical cryptographic behavior** across all implementations
+- **Same parameter order** (data, passphrase)
+- **Identical output formats** (binary structure or Base64 encoding)
+- **Matching API structure** (following language conventions)
+- **Interoperable encrypted data** - encrypt in one language, decrypt in another
 
 ## **Testing & Compatibility**
 
